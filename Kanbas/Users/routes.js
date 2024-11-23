@@ -52,13 +52,14 @@ export default function UserRoutes(app) {
       res.json(currentUser);
     };
 
-    const signin = (req, res) => { const { username, password } = req.body;
-        const currentUser = dao.findUserByCredentials(username, password);
+    const signin = (req, res) => { 
+      const { username, password } = req.body;
+      const currentUser = dao.findUserByCredentials(username, password);
         //console.log("Current User", currentUser);
-        if (currentUser) {
-          req.session["currentUser"] = currentUser;
-          res.json(currentUser);
-        } else {
+      if (currentUser) {
+        req.session["currentUser"] = currentUser;
+        res.json(currentUser);
+      } else {
           res.status(401).json({ message: "Unable to login. Try again later." });
         }    
     };
