@@ -5,7 +5,13 @@ import * as enrollmentsDao from "../Enrollments/dao.js";
 //let currentUser = null;
 
 export default function UserRoutes(app) {
-    const createUser = (req, res) => {
+  const createUser = async (req, res) => {
+    const user = await dao.createUser(req.body);
+    res.json(user);
+  };
+  app.post("/api/users", createUser);
+  
+    {/*const createUser = (req, res) => {
       const user = dao.findUserByUsername(req.body.username);
       if (user) {
         res.status(400).json({message: "Username already in use"});
@@ -14,11 +20,12 @@ export default function UserRoutes(app) {
       const newUser = dao.createUser(req.body);
       res.status(201).json(newUser)
 
-     };
+     };*/}
+
      const deleteUser = async (req, res) => {
       const status = await dao.deleteUser(req.params.userId);
       res.json(status);
-  };
+    };
 
 
     //const findAllUsers = (req, res) => {currentUser = dao.findAllUsers(); res.json(currentUser) };
@@ -97,7 +104,7 @@ export default function UserRoutes(app) {
     };
   
 
-    app.post("/api/users", createUser);
+   // app.post("/api/users", createUser);
     
     app.get("/api/users/:userId", findUserById);
     app.put("/api/users/:userId", updateUser);
@@ -156,9 +163,3 @@ export default function UserRoutes(app) {
     }
     app.delete("/api/users/current/enrollments", unEnrollment);
 }
-
-
-const createUser = async (req, res) => {
-  const user = await dao.createUser(req.body);
-  res.json(user);
-};
