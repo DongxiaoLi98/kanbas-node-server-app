@@ -154,7 +154,7 @@ export default function UserRoutes(app) {
     }; 
     app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);*/}
 
-    const createCourse = (req, res) => {
+    {/*const createCourse = (req, res) => {
       const currentUser = req.session["currentUser"];
       const newCourse = courseDao.createCourse(req.body);
       enrollmentsDao.enrollUserInCourse(currentUser._id, newCourse._id);
@@ -184,5 +184,5 @@ export default function UserRoutes(app) {
       enrollmentsDao.unEnrollUserInCourse(currentUser._id, courseId);
       res.sendStatus(204);
     }
-    app.delete("/api/users/current/enrollments", unEnrollment);
+    app.delete("/api/users/current/enrollments", unEnrollment);*/}
 }
