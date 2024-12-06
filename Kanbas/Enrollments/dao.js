@@ -1,4 +1,4 @@
-import Database from "../Database/index.js";
+//import Database from "../Database/index.js";
 import model from "./model.js";
 
 export async function findCoursesForUser(userId) {
@@ -6,7 +6,18 @@ export async function findCoursesForUser(userId) {
     return enrollments.map((enrollment) => enrollment.course);
 }
 
-export function enrollUserInCourse(userId, courseId) {
+
+   
+export function enrollUserInCourse(user, course) {
+    return model.create({ user, course });
+}
+
+export function unenrollUserFromCourse(user, course) {
+    return model.deleteOne({ user, course });
+}
+   
+
+{/*export function enrollUserInCourse(userId, courseId) {
     const {enrollments} = Database;
     enrollments.push({_id: Date.now(), user: userId, course: courseId }); //the enrollment information ={_id, userId, courseId}
 }
@@ -19,4 +30,4 @@ export function unEnrollUserInCourse(userId, courseId) {
 
 export function fetchAllEnrollments() {
     return Database.enrollments;
-}
+}*/}
