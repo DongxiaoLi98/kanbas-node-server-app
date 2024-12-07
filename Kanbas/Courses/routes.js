@@ -36,7 +36,11 @@ export default function CourseRoutes(app) {
     });
 
     app.delete("/api/courses/:courseId", async (req, res) => {
+        //const currentUser = req.session["currentUser"];
         const { courseId } = req.params;
+        //if (currentUser) {
+           // await enrollmentsDao.unenrollUserFromCourse(currentUser._id, courseId);
+       // }
         const status = await dao.deleteCourse(courseId);
         res.send(status);
       });
