@@ -89,20 +89,20 @@ export default function CourseRoutes(app) {
         res.json(modules);
     });*/}
 
-    app.post("/api/courses/:courseId/assignments", (req, res) => {
+    app.post("/api/courses/:courseId/assignments", async (req, res) => {
         const { courseId } = req.params;
         const assignment = {
           ...req.body,
           course: courseId,
         };
-        const newAssignment = assignmentsDao.createAssignment(assignment);
+        const newAssignment = await assignmentsDao.createAssignment(assignment);
         res.send(newAssignment);
     });
     
     // get all assignments from the specified course by course._id
-    app.get("/api/courses/:courseId/assignments", (req, res) => {
+    app.get("/api/courses/:courseId/assignments", async (req, res) => {
         const { courseId } = req.params;
-        const assignments = assignmentsDao.findAssignmentsforCourse(courseId);
+        const assignments = await assignmentsDao.findAssignmentsforCourse(courseId);
         res.json(assignments);
     });    
 }
