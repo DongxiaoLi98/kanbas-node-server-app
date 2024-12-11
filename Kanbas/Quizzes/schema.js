@@ -4,7 +4,7 @@ const quizSchema = new mongoose.Schema(
   {
     course: { 
       type: mongoose.Schema.Types.ObjectId, 
-      ref: "Course", 
+      ref: "CourseModel", 
       required: true 
     }, // Reference to a course
     title: { type: String, default: "Unnamed Quiz" },
@@ -19,7 +19,7 @@ const quizSchema = new mongoose.Schema(
     allowMultiAttempts: { type: Boolean, default: false },
     numberOfAttempts: { type: Number, default: 1 },
     showCorrectAnswers: { type: String, default: "Immediately" },
-    oneQuestionAtATime: { type: Boolean, default: true },
+    oneQuestionaTime: { type: Boolean, default: false },
     accessCode: { type: String, default:"" },
     webCam: { type: Boolean, default: false },
     lockQuestionsAfterAnswering: { type: Boolean, default: false },

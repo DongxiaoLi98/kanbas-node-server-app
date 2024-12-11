@@ -90,7 +90,7 @@ export default function QuizzesRoutes(app) {
     }
   });
 
-  app.put("/api/quizzes/:quizId/points", async (req, res) => {
+  app.put("/api/quizzes/:quizId/point", async (req, res) => {
     try {
       const { quizId } = req.params;
       const updatedQuiz = await quizzesDao.updateQuizPoints(quizId);

@@ -5,11 +5,15 @@ import * as enrollmentsDao from "../Enrollments/dao.js";
 
 export default function CourseRoutes(app) {
     const findUsersForCourse = async (req, res) => {
-        const { cid } = req.params;
+        try{const { cid } = req.params;
         const users = await enrollmentsDao.findUsersForCourse(cid);
         res.json(users);
-      };
-      app.get("/api/courses/:cid/users", findUsersForCourse);
+      }catch(error) {
+        console.error("Error fetching all courses:", error); // Error log
+        res.status(500).send({ error: "Failed to fetch all courses" });
+    
+      }};
+    app.get("/api/courses/:cid/users", findUsersForCourse);
 
       
     app.get("/api/courses/:courseId/modules", async (req, res) => {
@@ -41,8 +45,12 @@ export default function CourseRoutes(app) {
         //if (currentUser) {
            // await enrollmentsDao.unenrollUserFromCourse(currentUser._id, courseId);
        // }
-        const status = await dao.deleteCourse(courseId);
-        res.send(status);
+        try {const status = await dao.deleteCourse(courseId);
+        res.send(status);} catch (error) {
+            console.error("Error deleting question:", error.message);
+            res.status(500).json({ error: "Failed to delete courses. Check server logs for details." });
+   
+        }
       });
      
     app.post("/api/courses", async (req, res) => {
